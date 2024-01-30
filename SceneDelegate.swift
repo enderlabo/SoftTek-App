@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var homeRouter = HomeRouter()
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -19,9 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
                
            let window = UIWindow(windowScene: windowScene)
-               window.rootViewController = LoginView()
+               window.rootViewController = HomeView()
                self.window = window
                window.makeKeyAndVisible()
+               homeRouter.showHomeView(window: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
