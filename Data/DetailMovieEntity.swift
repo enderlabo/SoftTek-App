@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+
+struct DetailMovieEntity: Decodable {
+    
+    let title: String
+    let overview: String
+    let poster_path: String
+    let release_date: String
+    let overage_vote: Double
+}

@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct DetailViewModel {
+    let title: String
+    let overview: String
+    let poster_path: URL?
+    let release_date: String
+    let overage_vote: Double
+}

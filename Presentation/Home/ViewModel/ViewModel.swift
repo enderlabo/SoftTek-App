@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct ViewModel {
+    var title: String
+    var poster_path: URL?
+}

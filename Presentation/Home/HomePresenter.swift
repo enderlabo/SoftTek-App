@@ -8,21 +8,25 @@
 import Foundation
 
 protocol listUpComingMoviesView: AnyObject {
-    func getUpComingMovies(movies: [UpComingMoviesEntity])
+    func getUpComingMovies(movies: [ViewModel])
 }
 
 class HomePresenter {
-    var homeView: listUpComingMoviesView?
-    private let interactor: UpComingMoviesInteractor
+    weak var homeView: listUpComingMoviesView?
+    private let interactor: UpComingMoviesInteractorProtocol
+    var viewModels: [ViewModel] = []
+    private let mapper: Mapper
     
-    init(interactor: UpComingMoviesInteractor) {
+    init(interactor: UpComingMoviesInteractorProtocol, mapper: Mapper = Mapper()) {
         self.interactor = interactor
+        self.mapper = mapper
     }
     
     func onViewAppear() {
         Task {
-            let resp = await interactor.fetchUpComingMovies()
-            homeView?.getUpComingMovies(movies: resp.results)
+            let resp = await interactor.fetchUpComingMovies().results
+            viewModels = resp.map(mapper.map(entity:))
+            homeView?.getUpComingMovies(movies: viewModels)
         }
     }
 }

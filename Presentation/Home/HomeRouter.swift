@@ -10,11 +10,11 @@ import UIKit
 
 class HomeRouter {
     func showHomeView(window: UIWindow?) {
-        let view = HomeView()
         let interactor = UpComingMoviesInteractor()
         let presenter = HomePresenter(interactor: interactor)
+        let view = HomeView(presenter: presenter)
+        
         presenter.homeView = view
-        view.presenter = presenter
         
         window?.rootViewController = view
         window?.makeKeyAndVisible()
